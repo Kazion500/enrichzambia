@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'vrpss7r0-04rfj9)7ie5+ygnde-=4j2t$7om5ibz8m6*h)p@$f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['enrich-zm', '206.189.19.24', '127.0.0.1']
 
@@ -79,24 +79,24 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+# if DEBUG:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
+# else:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'enrichdb',
+        'USER': 'kazionenrich',
+        'PASSWORD': 'Changepass1',
+        'HOST': 'localhost',
+        'PORT': '',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'enrichdb',
-            'USER': 'kazionenrich',
-            'PASSWORD': 'Changepass1',
-            'HOST': 'localhost',
-            'PORT': '',
-        }
-    }
+}
 
 
 # Password validation
@@ -143,10 +143,10 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'staticfiles'
+    BASE_DIR / 'static'
 ]
 
-STATIC_ROOT = BASE_DIR / 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # CORS_ALLOWED_ORIGINS = [
