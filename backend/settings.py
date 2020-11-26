@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'vrpss7r0-04rfj9)7ie5+ygnde-=4j2t$7om5ibz8m6*h)p@$f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['enrich-zm', '206.189.19.24', '127.0.0.1']
 
