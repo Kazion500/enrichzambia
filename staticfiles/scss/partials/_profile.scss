@@ -1,0 +1,256 @@
+/*
+*=================
+* HERO-PROFILE CSS
+*=================
+*/
+
+.cover_overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba($color: #000000, $alpha: 0.7);
+}
+.profile-filter-heading {
+  a {
+    font-size: 0.58rem !important;
+  }
+}
+
+.profile-hero-section {
+  position: relative;
+  margin-bottom: 3em;
+  max-height: 340px;
+  height: 40vh;
+
+  img {
+    width: clamp(40px, 8vw, 50px);
+    height: clamp(40px, 8vw, 50px);
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+.profile-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2em 0;
+  height: 100%;
+
+  .btn {
+    margin-bottom: 1.3em;
+    font-size: 0.7rem;
+    position: relative !important;
+  }
+}
+
+.seller-profile {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.seller-profile-header-details {
+  text-transform: capitalize;
+}
+.seller-profile-header-details h4:first-child {
+  color: var(--primary-clr);
+}
+.seller-profile-header-details h4:last-child {
+  color: var(--line-clr);
+  font-weight: 500;
+  font-size: 0.9em;
+}
+
+/*
+*============
+* PROFILE CSS
+*============
+*/
+
+.profile-product-details {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.our-profile-details,
+.joined-details {
+  font-size: 0.84rem;
+  padding: 1em;
+
+  p {
+    margin-bottom: 0.7em;
+  }
+}
+.joined-details {
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  p {
+    margin-bottom: 0.2em;
+  }
+
+  img {
+    width: 35px;
+    display: inline-block;
+    margin-top: 1em;
+    cursor: pointer;
+  }
+}
+
+.profile-footer-details {
+  text-align: center;
+  padding: 0.5em 0 1em;
+  .btn {
+    font-size: 0.6rem;
+    transition: opacity 300ms;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+.our-profile-header,
+.joined-header,
+.map-header {
+  padding: 0.7em 0;
+  text-align: center;
+  border-bottom: 2px solid;
+
+  h2 {
+    font-size: clamp(1rem, 10vw, 1rem);
+  }
+}
+#heads {
+  font-weight: bold;
+}
+.our-profile,
+.joined,
+.our-map {
+  margin-bottom: 2em;
+  border: 2px solid;
+  border-radius: 5px;
+  min-height: 200px;
+}
+
+/*
+*===========================
+* CARD-SECTION-PROFILE-RIGHT
+*===========================
+*/
+
+.card-wrapper-profile {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+}
+
+/*
+*===========================
+* ADD MEDIA QUERY PROFILE!!!
+*===========================
+*/
+
+@media (min-width: 568px) {
+  .profile-details-section {
+    width: 60% !important ;
+  }
+  .profile-hero {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .btn {
+      margin-bottom: 1em;
+      font-size: 0.8rem;
+    }
+  }
+
+  .profile-hero-section {
+    max-height: 290px;
+    height: 70vh;
+  }
+
+  .profile-filter-heading {
+    a {
+      font-size: 0.8rem !important;
+    }
+  }
+
+  .profile-product-details {
+    display: flex !important;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 768px) {
+  .profile-details-section {
+    width: 90% !important ;
+  }
+
+  .profile-product-details {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .profile-details-left {
+    display: flex !important;
+    flex-wrap: wrap;
+    max-width: 700px;
+
+    & > section {
+      width: 320px !important;
+      margin-right: auto;
+
+      &:nth-child(2) {
+        margin-right: 0 !important;
+      }
+    }
+  }
+}
+
+@media (min-width: 1000px) {
+  .profile-details-section {
+    display: flex;
+  }
+  .profile-details-left {
+    display: initial !important;
+    flex-wrap: nowrap;
+
+    & > section {
+      width: 290px !important;
+      margin-right: auto;
+
+      &:nth-child(2) {
+        margin-right: 0 !important;
+      }
+    }
+  }
+
+  .profile-product-details {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+  }
+
+  .profile-product-details .card {
+    .card-img {
+      img {
+        height: 240px;
+      }
+    }
+
+    #seller-img {
+      width: 34px;
+      height: 34px;
+    }
+  }
+}

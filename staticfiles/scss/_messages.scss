@@ -1,0 +1,16 @@
+.success{
+    color: var(--bg-clr);
+    background: var(--primary-2-clr);
+    padding: 1em 2em;
+}
+.info{
+    color: var(--bg-clr);
+    background: rgb(139, 179, 192);
+    padding: 1em 2em;
+}
+
+.error{
+    color: var(--bg-clr);
+    background: rgb(235, 56, 56);
+    padding: 1em 2em;
+}

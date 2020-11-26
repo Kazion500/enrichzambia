@@ -1,0 +1,43 @@
+    // FORMPOPUP
+#cover_image_form{
+    padding: 1em 0;
+    display: none;
+    position: absolute;
+    bottom: -6em;
+    right: 4em;
+    background: var(--secondary-clr);
+    width: 250px;
+    border-radius: 5px;
+
+    #cover_img{
+        display: none;
+    }
+
+    label{
+        width: 70%;
+        margin-left: -1em;  
+    }
+
+    label::before{
+        content: 'Select Image';
+        background: var(--line-clr);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: .7em;
+        margin-bottom: .5em;
+        font-size: .9rem;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    input{
+        background: #000;
+    }
+    
+}
+
+.display_form_image{
+    display: flex !important;
+}

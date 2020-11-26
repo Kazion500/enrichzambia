@@ -13,20 +13,24 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 
 import os
+import json
+with open('/etc/config.json') as config_file:
+    config = json.load(config_file)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
+SECRET_KEY = config["SECRET_KEY"]
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'vrpss7r0-04rfj9)7ie5+ygnde-=4j2t$7om5ibz8m6*h)p@$f'
+SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['enrich-zm', '206.189.19.24', '127.0.0.1']
+ALLOWED_HOSTS = ['enrich-zm.com', '206.189.19.24', '127.0.0.1']
 
 
 # Application definition
@@ -159,5 +163,5 @@ EMAIL_BACKEND  = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'enrichzambia@gmail.com'
-EMAIL_HOST_PASSWORD = 'mzacnevgstfvjkoo'
+EMAIL_HOST_USER = config.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = config.get('EMAIL_PASSWORD')

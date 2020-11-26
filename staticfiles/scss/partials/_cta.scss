@@ -1,0 +1,40 @@
+.call-to-action{
+    background: var(--line-clr);
+    font-size: .7rem;
+    font-weight: 700;
+}
+
+.cta{
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a{
+        border-radius: 5px;
+        padding: .7em 1em;
+        background: var(--secondary-clr);
+        color: var(--bg-clr);
+        transition: opacity 250ms;
+
+        &:hover{
+            opacity: .9;
+        }
+    }
+}
+
+
+@media(min-width:568px){
+    .call-to-action{
+        font-size: .9rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+
+        a{
+            padding: 1em 2em;
+        }
+    }
+    .cta{
+        height: 160px;
+    }
+}
