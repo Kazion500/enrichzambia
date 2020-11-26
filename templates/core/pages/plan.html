@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- CARD SECTION MAIN-COURSE -->
+<section>
+    <div class="card-main-course-wrapper">
+        <div class="container main-course-two">
+            <div class="main-course-header-top-card">
+                <h2>CHOOSE A PLAN</h2>
+            </div>
+            <div class="card-main-course-content-wrapper">
+                
+                {% if plans.count > 0 %}
+                
+                    {% for plan in plans %}
+                    
+                        <div class="card-main-course">
+                            <div class="card-main-course-img">
+                                <!-- <img src="./img/woman.png" alt=""> -->
+                            </div>
+                            <div class="card-main-course-body" style="height: 70%;">
+                                <h4 style="margin: 0 0 2em; text-transform: uppercase;">{{plan.name}}</h4>
+                                <h1 style="margin: 0 0 .4em; font-size: 3rem;">K{{plan.price}}</h1>
+                                <ul>
+                                    {{ plan.description|safe }}
+                                </ul>
+                            </div>
+                            <div class="card-main-course-btn">
+                                <a href="" class="btn secondary-outline btn-sm">Select</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                    
+                
+                
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- END OF CARD SECTION MAIN-COURSE -->
+{% endblock %}

@@ -1,0 +1,320 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+  <!-- Main Header -->
+
+  <div class="profile-hero-section" 
+  style="background: url('{{ seller.cover_image.url }}') no-repeat;background-attachment: fixed; background-position: center; background-size: cover;">
+    <div class="cover_overlay">
+      <div class="container profile-hero">
+        
+        <div class="seller-profile">
+          <div class="user-profile-img">
+            <img src="{{ seller.image.url }}" alt="">
+          </div>
+          <div class="seller-profile-header-details">
+            
+            {% if seller.business_name %}
+            <h4>{{ seller.business_name}}</h4>
+            {% else %}
+            <h4>{{ seller.user.username}}</h4>
+            {% endif %}
+            <h4>{{ seller.user.email}}</h4>
+          </div>
+        </div>
+        
+        
+        {% if request.user == seller.user %}
+        <div class="profile-buttons" style="display: flex; gap: 10px;">
+          <div class="button-profile-hero">
+            <a href="" class="btn primary-outline btn-sm" id="cover_image">Upload cover image</a>
+          </div>
+          <div class="button-profile-hero">
+            <!-- <a href="" class="btn primary btn-sm" id="plan_upgrade">Upgrade Plan</a> -->
+          </div>
+        </div>
+         
+        {% else %}
+        <div class="profile-buttons" style="display: flex; gap: 10px;">
+          <div class="button-profile-hero ">
+            <a href="https://wa.me/{{ seller.phone }}" 
+            class="btn primary-outline btn-sm" 
+            id="whatsapp_connector" 
+            target="_blank">
+            Connect via WhatsApp  </a>
+          </div>
+        </div>
+        {% endif %}
+          
+      
+        <form method="POST" enctype="multipart/form-data" id="cover_image_form">{% csrf_token %}
+          <label for="cover_img"></label>
+          
+          {{ form.cover_image }}
+          <button type="submit"  class="btn primary btn-sm">Upload</button>
+        </form>
+        
+      </div>
+    </div>
+    
+  </div>
+
+
+    <section >
+
+      <div class="profile-filter">
+        <div class="container tab-filter profile-filter-heading">
+          <div><a href="{% url 'profile' request.user.username %}"class="active">Profile </a></div>
+          {% if request.user == seller.user and seller.user.profile.is_seller %}
+            <div>
+              <a href="{% url 'product-registration' %}">Add Products</a>
+            </div>   
+          {% endif %}
+          
+          <!-- <div><a href="">Reviews</a></div>
+          <div><a href="">Followers</a></div> -->
+        </div>
+      </div>
+
+      <div class="profile-details">
+        <div class="container profile-details-section">
+
+          <!-- PROFILE INFO -->
+          <div class="profile-details-left">
+
+            <!-- PROFILE -->
+
+            <section class="our-profile">
+              <div class="our-profile-header">
+                <h2 class="profile-h2">Our Profile</h2>
+              </div>
+              <div class="our-profile-details">
+                <p>
+                  <span id="heads"> Location:</span> <span id="results">
+                    {% if seller.business_location %}
+                      {{ seller.business_location }} 
+                    {% else %}
+                      {% if seller.user == request.user and request.user.profile.count > 0 %}
+                        <a href="{% url 'edit-profile' seller.user.username %}">Edit profile</a>
+                      {% else %}
+                        <span>No Location was found</span>
+                      {% endif %}
+                    {% endif %}
+                  </span>
+                </p>
+                <p>
+                  <span id="heads"> Business Name </span> : 
+                  {% if seller.business_name %}
+                    {{ seller.business_name }}
+                    {{ seller.get_country_display }},
+                    {{ seller.city.capitalize }} 
+                  {% else %}
+
+                    {% if seller.user == request.user and request.user.profile.count > 0 %}
+                      <a href="{% url 'edit-profile' seller.user.username %}">Edit profile</a>
+                    {% else %}
+                      <span>No name</span>
+                    {% endif %}
+                  {% endif %}
+                  </span>
+                </p>
+                <p>
+                  <span id="heads"> Phone Number </span> : <span id="results"> 
+                    {% if seller.phone %}
+                      {{ seller.phone }} 
+                    {% else %}
+                      {% if seller.user == request.user and request.user.profile.count > 0 %}
+                        <a href="{% url 'edit-profile' seller.user.username %}" title="Edit your Phone Number">Edit profile</a>
+                      {% else %}
+                        <span>No number</span>
+                      {% endif %}
+                    {% endif %}
+                  </span>
+                </p>
+                <p><span id="heads"> Deliver</span> : <span id="results"> 
+                  {% if seller.deliver %}
+                  {{ seller.get_deliver_display }} 
+                  {% else %}
+                    {% if seller.user == request.user and request.user.profile.count > 0 %}
+                      <a href="{% url 'edit-profile' seller.user.username %}" title="Edit your Delivery Status">Edit profile</a>
+                    {% else %}
+                      <span>No status added</span>
+                    {% endif %}
+                  {% endif %}
+                  </span>
+                </p>
+              </div>
+
+              {% if seller.user == request.user and request.user.profile.is_seller %}
+                <div class="profile-footer-details">
+                  <a href="{% url 'edit-profile' seller.user.username %}" class="btn primary btn-sm">Edit Profile</a>
+                </div>
+              {% else %}
+                <!-- <div class="profile-footer-details">
+                  <div class="rates_form">
+                    <form method="POST" accept="profile" style="margin-top: 0; width: 100%;">
+                      {% csrf_token %}
+                      {{ form_rate.user }}
+                      {{ form_rate.comment }}
+                      {{ form_rate.rate }}
+                      <div class="rate_ajax" style="margin: .5em 0;">
+                        <a href=""><i class="far fa-star"></i></a>
+                        <a href=""><i class="far fa-star"></i></a>
+                        <a href=""><i class="far fa-star"></i></a>
+                        <a href=""><i class="far fa-star"></i></a>
+                        <a href=""><i class="far fa-star"></i></a>
+                      </div>
+                      <button type="submit" class="btn primary btn-sm">Add rate</button>
+                    </form>
+                  </div>
+                </div> -->
+                <!-- <div class="profile-footer-details">
+                  <h5 style="margin-bottom:5px; color:red;">DO YOU WANT TO REGISTER AS A SELLER?</h5>
+                  <a href="{% url 'edit-profile' seller.user.username %}" class="btn primary btn-sm">Contact us</a>
+                </div> -->
+              {% endif %}
+                
+            
+            </section>
+
+            <!--END OF PROFILE -->
+
+
+              <!-- ABOUT US -->
+              {% if seller.bio %}
+                <section class="joined">
+                
+                  <div class="joined-header">
+                    <h2 class="profile-h2">Our Bio</h2>
+                  </div>
+                
+                  <p class="joined-details">
+                    {{ seller.bio }}
+                  </p>
+                
+                </section>
+              {% endif %}
+
+            <!-- JOINED -->
+            <section class="joined">
+              <div class="joined-header">
+                <h2 class="profile-h2">Joined</h2>
+              </div>
+              <div class="joined-details">
+                
+                {% if seller.business_name %}
+                  <p>{{ seller.business_name}}</p>
+                {% else %}
+                  {% if seller.user.profile.is_seller == True and seller.user == request.user %}
+                    <a href="{% url 'edit-profile' seller.user.username %}" title="Edit your Business name">Edit profile</a>
+                  {% endif %}
+
+                {% endif %}
+                  
+                
+                <p>Joined on <span id="date-joined"> {{ seller.user.date_joined|date:'d F, Y' }} </span></p>
+                <img src="{% static 'icons/joined.png' %}" alt="">
+              </div>
+            </section>
+
+
+            <!-- MAP -->
+            <!-- <section class="our-map"> -->
+              <!-- <div class="map-header">
+                <h2 class="profile-h2">Map</h2>
+              </div> -->
+              <!-- <div class="map-details"> -->
+                <!-- MAP COMES HERE -->
+              <!-- </div> -->
+            <!-- </section> -->
+          </div>
+          <!--END OF PROFILE INFO -->
+  
+          <!-- PRODUCT & SERVICES -->
+          <div class="profile-details-right">
+            <section>
+              <div id="profile-products" >
+
+                <div class="container product-listing ">
+                  <!-- New Upload -->
+                  <div class="new-upload ">  
+                    <!-- Card -->
+                    {% if seller.product_set.all.count > 0 %}
+                      <div class="card-wrapper-profile profile-product-details">
+                      {% for product in seller.product_set.all %}
+                      
+                      {% if product.approved %}
+                        <div class="card">
+                          <div class="card-img">
+                            <a href="{% url 'product' product.pk %}"><img src="{{product.image.url}}" alt=""></a>
+                          </div>
+                          <div class="card-body">
+                            <h5 class="product-name">{{ product.name }}</h5>
+                            <p class="product-category">{{ product.category.name }}</p>
+                            {% if product.previous_price and product.actual_price %}
+                            <p class="product-discount">K{{ product.actual_price }}</p>
+                            <p class="product-price">K{{ product.previous_price }}</p>
+                            {% elif product.actual_price %}
+                            <p class="product-discount">K{{ product.actual_price }}</p>
+                            {% endif %}
+                        
+                            <!-- PRODUCT RATES -->
+                            {% include '../product_review_rates.html' %}
+                          </div>
+                          <div class="card-footer">
+                            <div class="user-thumnail">
+                              <div id="seller-img">
+                                <a href="{% url 'profile' product.seller.user.username %}">
+                                  <img src="{{ product.seller.image.url }}" alt="seller-img">
+                                </a>
+                              </div>
+                        
+                        
+                              <span class="seller-name">
+                                <a href="{% url 'profile' product.seller.user.username %}">{{ product.seller.user.username.capitalize }}</a>
+                              </span>
+                            </div>
+                        
+                            <a href="{% url 'profile' product.seller.user.username %}" class="contact-seller">Contact Seller</a>
+                          </div>
+                        </div>
+                      {% endif %}
+                        
+                     
+    
+                      {% endfor %}
+                      </div>
+                    {% else %}
+                      <div>
+                        <h1 style="font-size: 3rem; text-align: center; line-height: 1.5;" >
+                          WOULD YOU LIKE TO BECOME A 
+                          <span style="color: var(--primary-clr);">SELLER?</span> 
+                          CONTACT US ON 
+                          <span style="color: var(--primary-clr);">(+260-963-319-027)</span>
+                        </h1>
+                      </div>
+                    {% endif %}
+                      
+                    <!--End of Card -->
+                  </div>
+                  <!-- End of New Upload -->
+          
+                </div>
+                
+              </div>
+            </section>
+          </div>
+          <!-- END OF PRODUCT & SERVICES -->
+        </div>
+       
+      </div>
+    </section>
+
+
+
+{% endblock %}
+
+

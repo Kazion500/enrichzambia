@@ -1,0 +1,14 @@
+  <!-- CALL TO ACTION -->
+  
+  {% if not request.user.is_authenticated %}
+    <section>
+      <div class="call-to-action">
+        <div class="container">
+          <div class="cta">
+            <a href="{% url 'signup' %}">REGISTER AS A SELLER</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+      

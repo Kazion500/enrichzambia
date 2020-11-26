@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'scss/main.css' %} ">
+    <link rel="stylesheet" href=" {% static 'scss/glider.min.css' %} ">
+    <link rel="stylesheet" href=" {% static 'fontawesome/css/all.css' %}">
+    <title>
+        ENRICH NURSES - Nurses at your service | {% block title %}{% endblock %}
+    </title>
+</head>
+<body>
+    <!-- NAVBAR -->
+    {% include 'core/navbar.html' %}
+    <!-- NAVBAR -->
+    
+    {% if messages %}
+        
+        {% for message in messages %}
+            <div class="{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+            
+    {% endif %}
+        
+    {% block content %}
+        
+    {% endblock %}
+
+    {% include 'core/footer.html' %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src=" {% static 'js/glider.min.js' %} "></script>
+    <script src=" {% static 'js/main.js' %} "></script>
+</body>
+</html>

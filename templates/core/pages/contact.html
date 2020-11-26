@@ -1,0 +1,55 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+   <section>
+      <div class="fye-section-register" style="background-color: var(--bg-clr);">
+         <div class="container fye-section-two">
+            <div class="fye-section-right-one">
+                <h1>NEED HELP?</h1>
+
+                <h4 style="margin-top: 1em;"> Whatsapp or Call us directly on </h4>
+                <p  style="font-size: 1rem; color: var(--primary-clr);"> +260963319027 </p>
+                <h4> OR </h4>
+                <p style="font-size: 1rem; margin-top: 0;color: var(--primary-clr)"> 
+                    enrichzambia@gmail.com 
+                </p>
+            </div>
+
+            <div class="fye-section-left-one contact-form">
+                <div class="fye-form-inner-wrapper mt mb">
+                    
+                    <form method="POST">
+                       {% csrf_token %}
+                        <div class="fye-form-inputs" style="width: 100%;">
+                            <h3>CONTACT US</h3>
+                            <div class="fye-form-group">
+                                {{ form.fullname }}
+                            </div>
+
+                            <div class="fye-form-group">
+                                {{ form.email }}
+                            </div>
+                            <div class="fye-form-group">
+                                {{ form.subject }}
+                            </div>
+                            <div class="fye-form-group">
+                                {{ form.message }}
+                            </div>
+
+                            <div class="fye-form-group fye-sign-up">
+                                <button type="submit" class="btn fye-signup btn-sm mb" style="width: 100%;">Send  <i class="fas fa-paper-plane"></i></button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+             </div>
+         </div>
+      </div>
+   </section>
+
+   
+{% endblock %}

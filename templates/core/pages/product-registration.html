@@ -1,0 +1,120 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+  
+  <section class="mt">
+    <div class="container form-table">
+      <div class="registration-product-table">
+        <div class="user-alert">
+          <div class="user-msg">
+            <p>You are currently Login as <span id="user-name-green">{{ seller_auth.username.upper }}</span></p>
+          </div>
+
+          <div class="close">
+            &times;
+          </div>
+
+        </div>
+
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Product name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <!-- Here-Employment -->
+            <tbody>
+ 
+              {% if products.count > 0 %}
+
+                {% for product in products %}                
+                  <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category.name }}</td>
+                    <td>K{{ product.actual_price }}</td>
+                    
+                    {% if product.previous_price %}
+                      <td>K{{ product.previous_price }}</td>
+                    {% else %}
+                      <td>Nill</td>
+                    {% endif %}
+
+                    {% if product.approved %}
+                      <td style="text-align:center">
+                        <span
+                          style="border-radius: 5px; color: var(--bg-clr); padding: .3em .6em; background-color: var(--primary-clr); font-size: .7rem;">
+                          Approved
+                        </span>
+                      </td>
+                    {% else %}
+                    <td style="text-align:center">
+                      <span
+                        style="border-radius: 5px; color: var(--bg-clr); padding: .3em .6em; background-color:  #dbb623; font-size: .7rem;">
+                        Pending
+                      </span>
+                    </td>
+                    {% endif %}
+                  </tr>
+                {% endfor %}
+
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="registration-product-form">
+        <div class="btn-large">
+          <a href="{% url 'profile' seller_auth.username %}">View profile</a>
+        </div>
+        {% if request.user.profile.product_set.count < 3 %}
+          <div class="form">
+
+            <div class="form-wrapper">
+              <h2>Product Registration</h2>
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                  {{ form.name}}
+                </div>
+                <div class="form-row">
+                  {{ form.category}}
+                </div>
+                <div class="form-row">
+                  {{ form.actual_price }}
+                </div>
+                <div class="form-row">
+                  {{ form.previous_price }}
+                </div>
+                <div class="form-row">
+                  {{ form.product_type }}
+                </div>
+                <div class="form-row">
+                  {{ form.description }}
+                </div>
+                <div class="form-row">
+                  {{ form.image }}
+                </div>
+            
+                <div class="form-row">
+                  <button type="submit" class="btn submit">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        {% endif %}
+        <h3 style="text-align: center;margin: 30px 0 10px;">You have reached the maximum number of product to register</h3>
+        <!-- <p>Would your like to upgrade your plan? Click <b><a href="" style="color: var(--primary-clr);">Here</a></b></p> -->
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

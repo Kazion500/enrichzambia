@@ -1,0 +1,89 @@
+.what-enrich-can-do{
+    margin-top: 1.2em;
+    margin-left:3em ;
+
+    li{
+        margin: 1em 0;
+        position: relative;
+        font-size: .8rem;
+
+        &::before{
+            content: '';
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--primary-clr) !important;
+            position: absolute;
+            top: 34%;
+            transform: translateX(-30%);
+            left: -6%;
+
+        }
+    }
+    h3{
+        font-size: .8rem;
+    }
+}
+
+.header-section-content{
+    position: relative;
+    .bg-img{
+        width: 250px;
+        position: absolute;
+        right: 0em;
+        bottom: 27%;
+        opacity: .2;
+    }
+
+    .primary-outline{
+        font-size: .6rem;
+        transition: background-color 150ms ease-in-out, border 150ms ease-in;
+    }
+    // .primary-outline:hover{
+    //     background-color: var(--primary-clr);
+    //     border: 0;
+    // }
+
+    h1,h3,ul{
+        z-index: 1000;
+    }
+}
+
+@media(min-width:568px){
+    .what-enrich-can-do{
+    
+        li{
+            font-size: 1rem;
+
+        }
+        h3{
+            font-size: 1.2rem;
+        }
+    }
+    
+    .header-section-content{
+        .bg-img{
+            width: 350px;
+            opacity: .4;
+        }
+    }
+}
+
+@media(min-width:1024px){
+    .header-section-content{
+        .bg-img{
+            width: 350px;
+            right: -10em;
+            opacity: .4;
+        }
+        .primary-outline{
+            font-size: .7rem;
+
+        }
+        h1{
+            font-size: 2.5rem;
+        }
+    }
+}
+
+// ADD DARK THEM WITH BLACK BACKGROUND

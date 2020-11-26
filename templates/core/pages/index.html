@@ -1,0 +1,170 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+    <!-- MAIN HEADER -->
+    <header>
+      <div class="header-main-section">
+        <div class="container header-main">
+    
+          <!-- Header Main Content -->
+          <div class="header-section-content ">
+            <div class="bg-img">
+              <img src="{% static 'img/wallet.svg' %}" alt="">
+            </div>
+            <h1>WHAT CAN ENRICH DO FOR YOU</h1>
+    
+    
+            <ul class="mb what-enrich-can-do">
+              <li> Can help you increase customer audience </li>
+              <li> Can help you find your dream Job </li>
+              <li> Can Improve your education career</li>
+              <h3 style="font-weight: 600;"> What are you waiting for <span style="color: var(--primary-clr);">JOIN
+                  NOW!!</span></h3>
+            </ul>
+    
+    
+            <a href="{% url 'contact' %}" class="btn primary-outline btn-sm" style="transform: rotate(-6deg); margin-top: 2em;">
+              Contact us <i class="fas fa-phone" style="transform: rotate(-6deg);"></i></a>
+    
+          </div>
+    
+          <!-- Header Section Image -->
+        </div>
+      </div>
+    </header>
+    <!--END OF MAIN HEADER -->
+
+  <!-- HOME PRODUCTS -->
+  <section>
+    <div id="products">
+      <div class="container home-product-heading">
+        <h1>PRODUCTS | SERVICES</h1>
+        <h3>Featured Products</h3>
+      </div>
+      
+      
+      <div class="container product-listing">
+        <!-- New Upload -->
+        {% if top_sale_products.count > 0 %}
+        <div class="product-list new-upload">
+          <div class="product-heading-styled">
+            <h4>Top Sales</h4>
+            <hr style="margin-bottom: 2em; border: 2px solid var(--line-clr);">
+          </div>
+
+          <!-- Card -->
+          <div class="card-wrapper">
+
+            {% for product in top_sale_products %}
+              <div class="card">
+                <div class="card-img">
+                  <a href="{% url 'product' product.pk %}"> <img src="{{ product.image.url }}" alt="seller-img"></a>
+                </div>
+                <div class="card-body">
+                  <h5 class="product-name">{{ product.name }}</h5>
+                  <p class="product-category">{{ product.category.name }}</p>
+
+                  {% if product.previous_price and product.actual_price %}
+                  <p class="product-price">K{{ product.previous_price }}</p> 
+                  <p class="product-discount">K{{ product.actual_price }}</p> 
+                  {% elif product.actual_price %}
+                  <p class="product-discount">K{{ product.actual_price }}</p> 
+                  {% endif %}
+                  
+                  <!-- PRODUCT RATES -->
+                  {% include '../product_review_rates.html' %}
+                </div>
+                <div class="card-footer">
+                  <div class="user-thumnail">
+                    <div id="seller-img">
+                      <a href="{% url 'profile' product.seller.user.username %}">
+                        <img src="{{ product.seller.image.url }}" alt="seller-img">
+                      </a>
+                    </div>
+
+
+                    <span class="seller-name">
+                      <a href="{% url 'profile' product.seller.user.username %}">{{ product.seller.user.username.capitalize }}</a>
+                    </span>
+                  </div>
+                  
+                  <a href="{% url 'profile' product.seller.user.username %}" class="contact-seller">Contact Seller</a>
+                </div>
+              </div>
+            {% endfor %}
+              
+            
+          <!--End of Card -->
+          </div>
+          <!-- End of New Upload -->
+
+          <div class="more-products">
+            <a href="{% url 'products' %} " class="btn primary btn-sm">More Products <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      
+    </div>
+  </section>
+  <!--END OF HOME PRODUCTS -->
+
+  <!-- COURSES COME HERE -->
+
+  {% if reviews.count > 0 %}
+  <section>
+    <div class="container home-product-heading mt">
+      <h1>WHAT PEOPLE SAY</h1>
+    </div>
+    
+      <div class="glider-contain">
+        <div class="glider" id="glider">
+          {% for review in reviews %}
+            <div id="reviews">
+              <div class="container review">
+                <blockquote>
+                  <p>
+                    <i class="fas fa-quote-left" style="font-size: 3rem; color: var(--line-clr);"></i> 
+                    {{ review.comment }} 
+                    
+                  </p>
+                  {% include '../rates.html' %}
+                  <h3 style="margin: 1em 0; font-weight: 500;">
+                    {{ review.user.user.username.capitalize }}
+                  </h3>
+                  
+                  {% if review.user.business_name %}
+                  <p style="float: left;">Credits to <span style="font-weight: 800;color: var(--primary);">{{  review.user.business_name }}</span></p>
+                  {% endif %}
+                    
+                 
+                  <div class="reviewer-img">
+                    <img src="{{ review.user.image.url }}" alt="">
+                  </div>
+                  
+                </blockquote>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+    
+      <!-- <button aria-label="Previous" class="glider-prev">«</button>
+      <button aria-label="Next" class="glider-next">»</button>
+      <div role="tablist" class="dots"></div> -->
+      </div>
+    
+  </section>
+  {% endif %}
+  <!-- REVIEWS -->
+  
+  
+    
+  {% include '../calltoaction.html' %}
+
+{% endblock %}
+  
+

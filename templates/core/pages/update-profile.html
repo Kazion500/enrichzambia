@@ -1,0 +1,55 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="form profile-update">
+    <div class="form-wrapper">
+      <h2>Edit Your profile</h2>
+      
+      <form method="POST" enctype="multipart/form-data">      
+        {% csrf_token %} 
+
+        <div><b>Note:</b> <span>Make sure you fill all the fields for customers to view </span> </div>
+        <div class="form-row mt-1">
+          {{ form.phone }}
+          <small>{{ form.phone.help_text }}</small>
+       </div>
+        <div class="form-row">
+          {{ form.country }}
+       </div>
+        <div class="form-row">
+          {{ form.city }}
+       </div>
+     
+        <div class="form-row">
+          {{ form.business_name }}
+       </div>
+        <div class="form-row">
+          {{ form.business_location }}
+       </div>
+        <!-- <div class="form-row">
+          {{ form.plan }}
+       </div> -->
+        <div class="form-row">
+          {{ form.deliver }}
+       </div>
+        <div class="form-row">
+          {{ form.image }}
+       </div>
+       <div class="form-row">
+        {{ form.user }}
+      </div>
+      <div class="form-row">
+        {{ form.bio }}
+        <small>{{ form.bio.help_text }}</small>
+      </div>
+          
+        <div class="form-row">
+          <button type="submit" class="btn submit">Submit</button>
+        </div>
+      </form>
+    </div>
+   
+  </div>
+{% endblock %}

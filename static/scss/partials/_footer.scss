@@ -1,0 +1,137 @@
+
+footer{
+    padding-top: 2em;
+    margin-top: auto;
+}
+
+.footer-content{
+    display: flex;
+    flex-direction: column;
+
+    div{
+        margin-top: 1.5em;
+    }
+    
+    h4{
+        margin-bottom: .7em;
+    }
+
+    li{
+
+        font-size: .85rem;
+
+        a{
+            color: var(--secondary-clr) !important;
+
+            &:hover{
+                text-decoration: underline;
+            }
+            
+        }
+    }
+
+    .fab{
+        font-size: 1.3rem;
+    }
+   
+}
+.social{
+    display: flex;
+    justify-content: center;
+    
+    .fab{
+        font-size: 1rem;
+    }
+    a{
+        width: 30px;
+        height: 30px;
+        border: 2px solid;
+        border-radius: 50%;
+        text-decoration: none !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--secondary-clr);
+        transition: color 250ms, background-color 250ms;
+        margin-right: .5em;
+
+
+        &:hover{
+            background-color: var(--secondary-clr); 
+            color: var(--line-clr) !important; 
+            
+        }
+    }
+}
+
+.last-footer{
+    display: flex;
+    justify-content: center;
+    background-color: var(--line-clr);
+    padding: .6em 0;
+    margin-top: 2em;
+    font-size: .85rem;
+
+    a{
+        font-weight: 600;
+    }
+}
+
+.logo-brand{
+    display: flex;
+    justify-content: center;
+
+    a{
+        display: block !important;
+        width: 100%;
+    }
+    
+    img{
+        width: 60%;
+    }
+}
+
+.footer{
+    text-align: center;
+}
+
+@media(min-width:568px){
+    .logo-brand { 
+        img{
+            width: 30%;
+        }
+    }
+    .footer-content{
+        display: grid;
+        grid-template-columns: repeat(2,auto);
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+@media(min-width:600px){
+    .footer{
+        width: 90% !important;
+        margin: 0 auto;
+        text-align: left;
+    }
+    
+    .logo-brand { 
+        justify-content: flex-start;  
+        margin-bottom: 1em; 
+    }
+    .footer-content{
+        grid-template-columns: repeat(4,auto);
+        line-height: 2.4 !important;
+    }
+}
+
+
+@media(min-width:1000px){
+    .logo-brand { 
+        
+        img{
+            width: 20%;
+        }
+    } 
+}

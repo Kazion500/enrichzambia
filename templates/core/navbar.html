@@ -1,0 +1,140 @@
+{% load static %}
+
+<!-- Navigations -->
+<nav>
+  <!-- Upper navbar -->
+  <div class="upper-nav">
+    <div class="container upper-nav-content">
+        <!-- Left Heading -->
+      <div class="upper-heading">
+        <p>Support Line <i class="fas fa-phone"></i> +260-963319027</p>
+      </div>
+
+        <!--Upper Right navMenu -->
+      
+      <ul class="upper-nav-items">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'contact' %}">Contact us</a></li>
+        <li><a href="{% url 'about' %}">About us</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Lower navbar -->
+  
+  {% if request.path == '/' or request.path == '/profile/edit/{{request.user.username}}' %}
+    <div class="lower-nav">
+      <div class="container lower-nav-content">
+        <!-- Logo -->
+        <div class="logo">
+          <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %} " alt="logo"></a>
+        </div>
+
+        <!--Lower Right navMenu -->
+        <div class="navbar-nav">
+          <ul class="lower-nav-items">
+            <li><a href="{% url 'products' %}">Products | Services</a></li>
+            <li><a href="{% url 'course' %}">Courses</a></li>
+            <li><a href="{% url 'find-your-employer' %}">Find your employer</a></li>
+            <li><a href="">Blog</a></li>
+          </ul>
+        </div>    
+
+        <button class="humbager">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+  {% elif request.path == '/find-your-employer/' %}
+  {% elif request.path == '/courses/' %}
+
+  {% else %}
+  
+  {% if request.path == '/login/' or request.path == '/signup/' %}
+    <div class="lower-nav">
+      <div class="container lower-nav-content product-logo">
+        <!-- Logo -->
+
+        <div class="logo p-logo">
+          <!-- <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %} " alt="logo"></a> -->
+        </div>
+
+        <!-- input -->
+        <div class="search-bar" style="visibility: hidden;">
+          <form action="{% url 'search' %}" method="GET">
+            <div class="form-group">
+              <input type="text" class="form-control" name="search" placeholder="Seach for Product or Category..." autofocus>
+              <button class="btn search">Search</button>
+            </div>	
+          </form>
+        </div>
+
+        <div class="cart-register">    
+        <h4 style="text-transform: uppercase;">Register as seller? <span style="text-transform: capitalize;color: red;"> Call on +260-963319027</span></h4>
+        </div>
+        
+      </div>
+    </div>
+  {% elif request.path == '/contact-us/' or request.path == '/about-us/' %}
+      
+  {% else %}
+
+    <div class="lower-nav">
+      <div class="container lower-nav-content product-logo">
+        <!-- Logo -->
+
+        <div class="logo p-logo">
+          <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %} " alt="logo"></a>
+        </div>
+
+        <!-- input -->
+        <div class="search-bar">
+          <form action="{% url 'search' %}" method="GET">
+            <div class="form-group">
+              <input type="text" class="form-control" name="search"  placeholder="Search for product by name or category..." autofocus>
+              <button class="btn search">Search</button>
+            </div>	
+          </form>
+        </div>
+
+        <div class="cart-register">
+          <div class="cart">
+            <!-- <a href=""><img src="{% static 'icons/cart.png' %}"> <span class="cart-val">0</span></a> -->
+          </div>
+          
+          {% if user.is_authenticated %}
+          <div class="register-user d-flex">
+            {% if request.user.profile.image %}
+            <a class="logout-img" href="{% url 'profile' request.user.profile.user.username%}">
+              <img src="{{request.user.profile.image.url}}" class="img-circle" alt="seller-img">
+            </a>
+            <span><i class="fas fa-caret-down"></i></span>
+            <div class="user-settings" style="margin-top: 0; top:50px; height:fit-content">
+              <ul>
+                <li><a href="{% url 'logout' %}" >Logout</a></li>
+                <!-- <li><a href="{% url 'logout' %}">Change Password</a></li> -->
+              </ul>
+            </div>
+          {% endif %}
+          </div>
+          {% else %}
+          <div class="register">
+            <a href="{% url 'login' %}">Login</a> or <a href="{% url 'signup' %}">Register</a>
+          </div>
+          {% endif %}
+            
+        
+        </div>
+        
+      </div>
+    </div>
+  {% endif %}
+    
+  {% endif %}
+
+  <!-- End of Lower navbar -->
+    
+  
+
+</nav>

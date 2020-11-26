@@ -1,0 +1,86 @@
+{% load static %}
+<!-- FOOTER -->
+
+{% if request.path == '/' %}
+
+<footer>
+  <div class="last-footer"
+    style="height: 30px;display: flex; flex-direction: column; justify-content: center; align-items: center; background: none;">
+    <!-- <span style="margin-top: 1em;"><a href="" target="_blank" style="font-weight: normal;">Terms & Conditions</a></span> 
+    <span style="margin: .7em 0;"><a href="" target="_blank" style="font-weight: normal;">Policies</a></span>  -->
+    <!-- <span>Copyright&copy;2020 <a href="https://web.facebook.com/K.a.Z.i.O.n500" target="_blank">KazionDesigns</a></span> -->
+
+    <!-- <div> -->
+    <span>Copyright&copy;2020 <a href="https://web.facebook.com/K.a.Z.i.O.n500" target="_blank">KazionWebDev</a></span>
+    <!-- </div> -->
+
+  </div>
+</footer>
+
+<!-- <footer>
+  <div class="container footer">
+    <div class="logo-brand">
+      <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %} " alt="logo"></a>
+    </div>
+
+    <div class="footer-content">
+      <div class="follow-us">
+        <h4>Follow us</h4>
+        <ul class="social">
+          <li><a href="https://www.facebook.com/EnrichZambia/" target="_blank"> <i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="https://wa.me/+260963319027" target="_blank"> <i class="fab fa-whatsapp"></i></a></li>
+          <li><a href=""> <i class="fab fa-twitter"></i></a></li>
+        </ul>
+      </div>
+
+      <div class="additional-info">
+        <h4>Additional Info</h4>
+        <ul>
+          <li><a href="">Terms & Conditions</a> </li>
+          <li><a href="">Private & Policies</a></li>
+        </ul>
+      </div>
+
+      
+      <div class="need-help">
+        <h4>Need Help?</h4>
+        <ul>
+          <li><a href="">FAQ</a> </li>
+          <li><a href="">Contributions</a> </li>
+        </ul>
+      </div>
+
+      <div class="need-help">
+        <h4>Product Category</h4>
+        <ul>
+          <li><a href="{% url 'search' %}">Food</a></li>
+          <li><a href="">Electronics</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="last-footer">
+    <span>Copyright&copy;2020 <a href="https://web.facebook.com/K.a.Z.i.O.n500" target="_blank">KazionWebDev</a></span>
+  </div>
+</footer> -->
+{% elif request.path == '/contact-us/' or request.path == '/login/' or request.path == '/signup/' %}
+
+{% elif request.path == '/find-your-employer/' %}
+{% elif request.path == '/courses/' %}
+
+{% else %}
+<footer>
+  <div class="last-footer"
+  style="height: 30px;display: flex; flex-direction: column; justify-content: center; align-items: center; background: none;">
+    <!-- <span style="margin-top: 1em;"><a href="" target="_blank" style="font-weight: normal;">Terms & Conditions</a></span> 
+    <span style="margin: .7em 0;"><a href="" target="_blank" style="font-weight: normal;">Policies</a></span>  -->
+    <!-- <span>Copyright&copy;2020 <a href="https://web.facebook.com/K.a.Z.i.O.n500" target="_blank">KazionDesigns</a></span> -->
+
+    <!-- <div> -->
+      <span>Copyright&copy;2020 <a href="https://web.facebook.com/K.a.Z.i.O.n500" target="_blank">KazionWebDev</a></span> 
+    <!-- </div> -->
+    
+  </div>
+</footer>
+
+{% endif %}

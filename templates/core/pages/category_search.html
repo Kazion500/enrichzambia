@@ -1,0 +1,138 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<!-- Main Header -->
+<div class="header-main-section">
+    <div class="hero">
+        <div class="container product-hero">
+            <div class="hero-navigations">
+                <a href="{% url 'home' %}">Home </a> <i class="fas fa-chevron-right"></i>
+                <a href="{% url 'products' %}">Products</a>
+            </div>
+
+            <p>Get your favourite product</p>
+        </div>
+    </div>
+</div>
+
+<!-- PRODUCT LISTING -->
+<section>
+    <div id="products">
+
+        <div class="container tab-filter">
+            <div><a href="{% url 'products' %}" class="category_tab active-class">All Categories</a></div>
+            <div><span class="category_tab">Cloths <i class="fas fa-chevron-down"></i></span></div>
+            <div><span class="category_tab">Food <i class="fas fa-chevron-down"></i></span></div>
+            <div><span class="category_tab">Electronics <i class="fas fa-chevron-down"></i></span></div>
+            <!-- <div><span class="category_tab">Health Supplies <i class="fas fa-chevron-down"></i></span></div> -->
+        
+            <!-- Tab Templates -->
+        
+            <div class="tab__content" id="cloth">
+                <div class="tab__category">
+                    <a href="{% url 'category_search' 'Men' %}">Men</a>
+                    <a href="{% url 'category_search' 'Women' %}">Women</a>
+                    <a href="{% url 'category_search' 'Children' %}">Children</a>
+                </div>
+            </div>
+            <div class="tab__content" id="food">
+                <div class="tab__category">
+                    <a href="{% url 'category_search' 'Platter' %}">Platter</a>
+                    <a href="{% url 'category_search' 'Vegetables' %}">Vegetables</a>
+                    <a href="{% url 'category_search' 'Cakes' %}">Cakes</a>
+                </div>
+            </div>
+            <div class="tab__content" id="electronics">
+                <div class="tab__category">
+                    <a href="{% url 'category_search' 'Phones' %}">Phones</a>
+                    <a href="{% url 'category_search' 'Computers' %}">Computers</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container product-listing">
+
+            {% if approved_products.count > 0 %}
+            
+            <!-- PRODUCT | SERVICES -->
+            <div class="product-list cloths">
+                <div class="product-heading-styled">
+                    <h4> RESULT FOUND { {{ approved_products.count }} }</h4>
+                    <hr style="margin-bottom: 2em; border: 2px solid var(--line-clr);">
+                </div>
+
+
+                <!-- Card -->
+                <div class="card-wrapper">
+                    {% for product in approved_products %}
+                    <div class="card">
+                        <div class="card-img">
+                            <a href="{% url 'product' product.pk %}">
+                                <img src="{{product.image.url}}" alt="">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="product-name">{{product.name}}</h5>
+                            <p class="product-category">{{ product.category.name }}</p>
+
+                            {% if product.previous_price and product.actual_price %}
+                            <p class="product-discount">K{{ product.actual_price }}</p>
+                            <p class="product-price">K{{ product.previous_price }}</p>
+                            {% elif product_obj.actual_price %}
+                            <p class="product-discount">K{{ product.actual_price }}</p>
+                            {% endif %}
+
+                            <!-- PRODUCT RATES -->
+                            {% include '../product_review_rates.html' %}
+                        </div>
+                        <div class="card-footer">
+                            <div class="user-thumnail">
+                                <div id="seller-img">
+                                    <a href="{% url 'profile' product.seller.user.username %}">
+                                        <img src="{{ product.seller.image.url }}" alt="seller-img">
+                                    </a>
+                                </div>
+
+                                <span class="seller-name">
+                                    <a href="{% url 'profile' product.seller.user.username %}">{{ product.seller.user.username.capitalize }}
+                                    </a>
+                                </span>
+                            </div>
+
+                            <a href="{% url 'profile' product.seller.user.username %}" class="contact-seller">Contact
+                                Seller</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!--End of Card -->
+            </div>
+            <!-- End of Food -->
+            {% else %}
+            <div class="product-list cloths">
+                <div class="product-heading-styled">
+                    <h4>No results found</h4>
+                    <hr style="margin-bottom: 2em; border: 2px solid var(--line-clr);">
+                </div>
+    
+            </div>
+            
+            {% endif %}
+
+        </div>
+
+    </div>
+</section>
+
+{% include '../calltoaction.html' %}
+
+</body>
+
+</html>
+
+
+{% endblock %}

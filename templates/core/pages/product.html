@@ -1,0 +1,116 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+    <!-- PRODUCT LISTING -->
+    <section>
+      <div id="products">
+
+        <div class="container single-product">
+            <div class="product-single-img">
+                <img src="{{ product.image.url }}" alt="">
+                
+            </div>
+            <div class="product-details">
+              <h1>{{ product.name}}</h1>
+              <h2>K{{ product.actual_price}}</h2>
+              
+              {% if product.previous_price %}
+              <h2><del>K{{ product.actual_price}}</del></h2>
+              {% endif %}
+                
+              <h3 class="product-titles">Description</h3>
+              <p> {{ product.description }} </p>
+              <!-- <div class="quantity_data">
+                <h3 class="product-titles">Quantity</h3> 
+                <a href=""><i class="fas fa-plus"></i></a>
+                  <input type="text" value="0" id="quantity-input" style="text-align: center; font-weight: 800;">
+                <a href=""><i class="fas fa-minus"></i></a>
+              </div> -->
+              
+              <div class="add_to_cart_continue_shopping">
+                <a href="{% url 'profile' product.seller.user.username %}" 
+                class="btn primary btn-sm">Contact Seller<i class="fas fa-phone" style="transform: rotate(0deg);"></i></a>
+                <a href="{% url 'products' %} " class="btn secondary-outline btn-sm">Continue Shopping <i class="fas fa-share-square"></i></a>
+              </div>
+                                
+            </div>
+        </div>
+        
+        
+          
+          {% if related_products %}
+            <div class="container product-listing">
+              <!-- Related products -->
+                <div class="product-list cloths">
+                  <div class="product-heading-styled">
+                    <h4>Related Products</h4>
+                    <hr style="margin-bottom: 2em; border: 2px solid var(--line-clr);">
+                  </div>
+        
+                  <!-- Card -->
+                  <div class="card-wrapper">
+                    
+                    {% for product in related_products %}
+                
+                      <div class="card">
+                        <div class="card-img">
+                          <a href="{% url 'product' product.pk %}"> <img src="{{ product.image.url }}" alt="seller-img"></a>
+                        </div>
+                        <div class="card-body">
+                          <h5 class="product-name">{{ product.name }}</h5>
+                          <p class="product-category">{{ product.category.name }}</p>
+
+                          {% if product.previous_price and product.actual_price %}
+                          <p class="product-price">K{{ product.previous_price }}</p> 
+                          <p class="product-discount">K{{ product.actual_price }}</p> 
+                          {% elif product.actual_price %}
+                          <p class="product-discount">K{{ product.actual_price }}</p> 
+                          {% endif %}
+                          
+                          <!-- PRODUCT RATES -->
+                          {% include '../product_review_rates.html' %}
+                        </div>
+                        <div class="card-footer">
+                          <div class="user-thumnail">
+                            <div id="seller-img">
+                              <a href="{% url 'profile' product.seller.user.username %}">
+                                <img src="{{ product.seller.image.url }}" alt="seller-img">
+                              </a>
+                            </div>
+
+
+                            <span class="seller-name">
+                              <a href="{% url 'profile' product.seller.user.username %}">{{ product.seller.user.username.capitalize }}</a>
+                            </span>
+                          </div>
+                          
+                          <a href="{% url 'profile' product.seller.user.username %}" class="contact-seller">Contact Seller</a>
+                        </div>
+                      </div>
+                    
+                    {% endfor %}
+                      
+                    
+                  </div>
+        
+                  <!--End of Card -->
+                </div>
+              <!-- End of Related products -->
+            </div>
+          {% endif %}
+            
+       
+        
+      </div>
+    </section>
+
+
+    {% include '../calltoaction.html' %}
+
+
+{% endblock %}
+

@@ -1,0 +1,71 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}  
+
+    <div class="container product-listing mt-3">
+        
+        {% if products %}
+           
+        <!-- Related products -->
+        <div class="product-list cloths">
+            <h1 style="margin: 3em 0 .5em; text-transform: uppercase;">Search Results { {{ products_returned }} } Found</h1>
+            
+            <hr style="margin-bottom: 2em; border: 2px solid var(--line-clr);">
+
+        <!-- Card -->
+        <div class="card-wrapper">
+            {% for product in products %}
+                <div class="card">
+                <div class="card-img">
+                    <a href="{% url 'product' product.pk %}"> <img src="{{ product.image.url }}" alt="seller-img"></a>
+                </div>
+                <div class="card-body">
+                    <h5 class="product-name">{{ product.name }}</h5>
+                    <p class="product-category">{{ product.category.name }}</p>
+
+                    {% if product.previous_price and product.actual_price %}
+                    <p class="product-price">K{{ product.previous_price }}</p> 
+                    <p class="product-discount">K{{ product.actual_price }}</p> 
+                    {% elif product.actual_price %}
+                    <p class="product-discount">K{{ product.actual_price }}</p> 
+                    {% endif %}
+                    
+                    <!-- PRODUCT RATES -->
+                    {% include '../product_review_rates.html' %}
+                </div>
+                <div class="card-footer">
+                    <div class="user-thumnail">
+                    <div id="seller-img">
+                        <a href="{% url 'profile' product.seller.user.username %}">
+                        <img src="{{ product.seller.image.url }}" alt="seller-img">
+                        </a>
+                    </div>
+
+
+                    <span class="seller-name">
+                        <a href="{% url 'profile' product.seller.user.username %}">{{ product.seller.user.username.capitalize }}</a>
+                    </span>
+                    </div>
+                    
+                    <a href="{% url 'profile' product.seller.user.username %}" class="contact-seller">Contact Seller</a>
+                </div>
+                </div>
+            {% endfor %}
+        </div>
+        <!--End of Card -->
+        </div>
+        <!-- End of Related products -->
+
+        {% else %}
+        <div class="product-list cloths">
+            <h1 style="margin: 3em 0 .5em; text-transform: uppercase;">No Results Found </h1>
+            <p>There were no results matching your search.....</p>
+            
+            <hr style="margin-bottom: 2em; border: 2px solid var(--line-clr);">
+      </div>
+        {% endif %}
+    </div>
+    
+{% endblock %}

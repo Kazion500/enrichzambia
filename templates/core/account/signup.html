@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+ 
+  <section id="login-form">
+    <div class="login-form">
+      <h1>CREATE AN ACCOUNT</h1>
+      <small style="text-align: center; margin-top: 1em; display: block;">Have an account ? <a href="{% url 'login' %} ">Login</a></small>
+      <form method="POST" class="">
+        
+        {% csrf_token %}
+        
+        <div>
+          {{ form.username }}
+          {{ form.email }}
+        </div>
+            
+        <div>
+          {{ form.password1 }}
+          {{ form.password2 }}
+        </div>
+
+        <div>
+          {{ form.city }}
+          {{ form.country }}
+        </div>  
+
+        <button type="submit" class="btn primary-1 auth_loging_signup-btn">
+          Signup
+        </button>
+
+      </form>
+    </div>
+   
+  </section>
+    
+{% endblock %}

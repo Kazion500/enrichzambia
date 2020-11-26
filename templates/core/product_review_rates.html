@@ -1,0 +1,40 @@
+
+
+{% if product.reviews %}
+      
+<span class="product-rating">
+{% if product.reviews.rates == 1 %}
+    <i class="fas fa-star"></i>
+    <i class="far fa-star"></i>
+    <i class="far fa-star"></i>
+    <i class="far fa-star"></i>
+    <i class="far fa-star"></i>
+{% elif product.reviews.rates == 2 %}
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="far fa-star"></i>
+    <i class="far fa-star"></i>
+    <i class="far fa-star"></i>
+{% elif product.reviews == 3 %}
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="far fa-star"></i>
+    <i class="far fa-star"></i>
+{% elif product.reviews == 4 %}
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="far fa-star"></i>
+{% elif product.reviews == 5 %}
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+{% endif %}
+            
+</span>
+
+{% endif %}
