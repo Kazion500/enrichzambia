@@ -155,7 +155,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 #     "http://localhost:8080",
 #     "http://127.0.0.1:3000"
 # ]
-
 EMAIL_BACKEND  = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
