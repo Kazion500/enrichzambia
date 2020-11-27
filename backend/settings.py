@@ -14,8 +14,7 @@ from pathlib import Path
 
 import os
 import json
-with open('/etc/config.json') as config_file:
-    config = json.load(config_file)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,12 +22,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-SECRET_KEY = config["SECRET_KEY"]
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SECRET_KEY
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+# SECURITY WARNING: keep the secret key used in production secret!
+if DEBUG:
+    SECRET_KEY = "thikjlnacwjeiq-0938273423-4234/3432/sds"
+else:
+    with open('/etc/config.json') as config_file:
+        config = json.load(config_file)
+
+    SECRET_KEY = config["SECRET_KEY"]
+
 
 ALLOWED_HOSTS = ['enrich-zm.com', '206.189.19.24', '127.0.0.1']
 
@@ -84,24 +91,24 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-# if DEBUG:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': BASE_DIR / 'db.sqlite3',
-#         }
-#     }
-# else:
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'enrichdb',
-        'USER': 'kazionenrich',
-        'PASSWORD': 'Changepass1',
-        'HOST': 'localhost',
-        'PORT': '',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'enrichdb',
+            'USER': 'kazionenrich',
+            'PASSWORD': 'Changepass1',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
 
 # Password validation
@@ -125,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGIN_URL = 'login/'
 LOGIN_REDIRECT_URL = 'products'
-LOGOUT_REDIRECT_URL='products'
+LOGOUT_REDIRECT_URL = 'products'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -159,9 +166,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 #     "http://localhost:8080",
 #     "http://127.0.0.1:3000"
 # ]
-EMAIL_BACKEND  = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = config.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = config.get('EMAIL_PASSWORD')
+if not DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = config.get('EMAIL_USER')
+    EMAIL_HOST_PASSWORD = config.get('EMAIL_PASSWORD')
