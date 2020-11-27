@@ -67,7 +67,7 @@
 
       <div class="profile-filter">
         <div class="container tab-filter profile-filter-heading">
-          <div><a href="{% url 'profile' request.user.username %}"class="active">Profile </a></div>
+          <div><a href="{% url 'profile' seller.user.username %}"class="active">Profile </a></div>
           {% if request.user == seller.user and seller.user.profile.is_seller %}
             <div>
               <a href="{% url 'product-registration' %}">Add Products</a>
