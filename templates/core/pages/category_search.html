@@ -22,36 +22,81 @@
 <section>
     <div id="products">
 
-        <div class="container tab-filter">
-            <div><a href="{% url 'products' %}" class="category_tab active-class">All Categories</a></div>
-            <div><span class="category_tab">Cloths <i class="fas fa-chevron-down"></i></span></div>
-            <div><span class="category_tab">Food <i class="fas fa-chevron-down"></i></span></div>
-            <div><span class="category_tab">Electronics <i class="fas fa-chevron-down"></i></span></div>
-            <!-- <div><span class="category_tab">Health Supplies <i class="fas fa-chevron-down"></i></span></div> -->
-        
-            <!-- Tab Templates -->
-        
-            <div class="tab__content" id="cloth">
-                <div class="tab__category">
-                    <a href="{% url 'category_search' 'Men' %}">Men</a>
-                    <a href="{% url 'category_search' 'Women' %}">Women</a>
-                    <a href="{% url 'category_search' 'Children' %}">Children</a>
-                </div>
-            </div>
-            <div class="tab__content" id="food">
-                <div class="tab__category">
-                    <a href="{% url 'category_search' 'Platter' %}">Platter</a>
-                    <a href="{% url 'category_search' 'Vegetables' %}">Vegetables</a>
-                    <a href="{% url 'category_search' 'Cakes' %}">Cakes</a>
-                </div>
-            </div>
-            <div class="tab__content" id="electronics">
-                <div class="tab__category">
-                    <a href="{% url 'category_search' 'Phones' %}">Phones</a>
-                    <a href="{% url 'category_search' 'Computers' %}">Computers</a>
-                </div>
-            </div>
+       <div class="container tab-filter">
+        <div><a href="{% url 'products' %}" class="category_tab active-class">All Categories</a></div>
+        <div><span class="category_tab">Clothing <i class="fas fa-chevron-down"></i></span></div>
+        <div><span class="category_tab">Shoes <i class="fas fa-chevron-down"></i></span></div>
+        <div><span class="category_tab">Food <i class="fas fa-chevron-down"></i></span></div>
+        <div><span class="category_tab">Electronics <i class="fas fa-chevron-down"></i></span></div>
+        <div><span class="category_tab">Home Appreance <i class="fas fa-chevron-down"></i></span></div>
+        <!-- <div><span class="category_tab">Health Supplies <i class="fas fa-chevron-down"></i></span></div> -->
+      
+        <!-- Tab Templates -->
+      
+        <div class="tab__content" id="cloth">
+          <div class="tab__category">
+            
+          {% if categories %}
+            {% for category in categories %}
+              {% if category.cat_type == 'Clothing' %}
+                <a href="{% url 'category_search' category.name %}">{{ category.name }}</a>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+          </div>
+          
         </div>
+
+        <div class="tab__content" id="shoes">
+          <div class="tab__category">
+            
+          {% if categories %}
+            {% for category in categories %}
+              {% if category.cat_type == 'Shoes' %}
+                <a href="{% url 'category_search' category.name %}">{{ category.name }}</a>
+              {% endif %}
+
+            {% endfor %}
+          {% endif %}
+          </div>
+          
+        </div>
+
+        <div class="tab__content" id="food">
+          <div class="tab__category">
+            {% if categories %}
+              {% for category in categories %}
+                {% if category.cat_type == 'Food' %}
+                  <a href="{% url 'category_search' category.name %}">{{ category.name }}</a>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="tab__content" id="electronics">
+          <div class="tab__category">
+            {% if categories %}
+              {% for category in categories %}
+                {% if category.cat_type == 'Electronic' %}
+                  <a href="{% url 'category_search' category.name %}">{{ category.name }}</a>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="tab__content" id="home_appreance">
+          <div class="tab__category">
+            {% if categories %}
+              {% for category in categories %}
+                {% if category.cat_type == 'Home Appreance' %}
+                  <a href="{% url 'category_search' category.name %}">{{ category.name }}</a>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
         
         <div class="container product-listing">
 
@@ -129,10 +174,5 @@
 </section>
 
 {% include '../calltoaction.html' %}
-
-</body>
-
-</html>
-
 
 {% endblock %}

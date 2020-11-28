@@ -79,10 +79,12 @@ def contact_view(request):
 def products(request):
     approved_products = Product.objects.filter(approved=True)
     top_sale_products = Product.objects.filter(top_sale=True, approved=True)
+    categories = Category.objects.all()
 
     context = {
         'approved_products': approved_products,
-        'top_sale_products': top_sale_products
+        'top_sale_products': top_sale_products,
+        'categories': categories,
     }
 
     return render(request, 'core/pages/products.html', context)
@@ -91,9 +93,11 @@ def products(request):
 def category_search_view(request, category):
     approved_products = Product.objects.filter(
         approved=True, category__name__iexact=category)
+    categories = Category.objects.all()
 
     context = {
         'approved_products': approved_products,
+        'categories': categories,
     }
 
     return render(request, 'core/pages/category_search.html', context)
@@ -184,13 +188,14 @@ def plan_view(request):
 
 
 def profile_view(request, username):
-    seller = get_object_or_404(Profile, user__username=username)
+    seller = get_object_or_404(Profile, user__username__exact=username)
 
     if request.method == "POST":
         form = CoverUpload(request.POST, request.FILES)
         if form.is_valid():
             cover_image = form.cleaned_data.get('cover_image')
-            profile = get_object_or_404(Profile, user__username=username)
+            profile = get_object_or_404(
+                Profile, user__username__exact=username)
             profile.cover_image.delete()
             profile.cover_image = cover_image
             profile.save()

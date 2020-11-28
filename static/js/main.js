@@ -5,7 +5,9 @@ try {
   iconThatChangesUserSettings.addEventListener("click", (e) => {
     userSettings.classList.toggle("display-setting");
   });
-} catch (error) {}
+} catch (error) {
+  error;
+}
 
 // GLIDER JS
 
@@ -13,7 +15,7 @@ try {
   const glider = new Glider(document.getElementById("glider"));
   sliderAuto(glider, 4000);
 } catch (error) {
-  console.error(error, "Will check later");
+  // console.error(error, "Will check later");
 }
 
 function sliderAuto(slider, miliseconds) {
@@ -49,29 +51,54 @@ categoryTabs.forEach((val) => {
     e.preventDefault();
     let tabTitle = val.textContent;
     tabContents.forEach((tabContent) => {
+      console.log(tabContents);
       if (tabTitle.includes("All Categories")) {
         if (val.classList.contains("active-class")) {
           val.classList.remove("active-class");
         }
 
         if (
+          tabContents[0].classList.contains("tab__active") ||
           tabContents[1].classList.contains("tab__active") ||
           tabContents[2].classList.contains("tab__active") ||
-          tabContents[0].classList.contains("tab__active")
+          tabContents[3].classList.contains("tab__active") ||
+          tabContents[4].classList.contains("tab__active")
         ) {
-          tabContents[1].classList.remove("tab__active");
-          tabContents[2].classList.remove("tab__active");
-          tabContents[0].classList.remove("tab__active");
+          tabContents[0].classList.remove("tab__active"); 
+          tabContents[1].classList.remove("tab__active"); 
+          tabContents[2].classList.remove("tab__active"); 
+          tabContents[3].classList.remove("tab__active"); 
+          tabContents[4].classList.remove("tab__active");
         }
-      } else if (tabTitle.includes("Cloths")) {
+      } else if (tabTitle.includes("Clothing")) {
         if (tabContent.attributes.id.textContent === "cloth") {
           tabContent.classList.add("tab__active");
           if (
             tabContents[1].classList.contains("tab__active") ||
-            tabContents[2].classList.contains("tab__active")
+            tabContents[2].classList.contains("tab__active") ||
+            tabContents[3].classList.contains("tab__active") ||
+            tabContents[4].classList.contains("tab__active") 
           ) {
             tabContents[1].classList.remove("tab__active");
             tabContents[2].classList.remove("tab__active");
+            tabContents[3].classList.remove("tab__active");
+            tabContents[4].classList.remove("tab__active");
+          }
+        }
+      } else if (tabTitle.includes("Shoes")) {
+        if (tabContent.attributes.id.textContent === "shoes") {
+          tabContent.classList.add("tab__active");
+
+          if (
+            tabContents[0].classList.contains("tab__active") ||
+            tabContents[2].classList.contains("tab__active") ||
+            tabContents[3].classList.contains("tab__active") ||
+            tabContents[4].classList.contains("tab__active")
+          ) {
+            tabContents[0].classList.remove("tab__active");
+            tabContents[2].classList.remove("tab__active");
+            tabContents[3].classList.remove("tab__active");
+            tabContents[4].classList.remove("tab__active");
           }
         }
       } else if (tabTitle.includes("Food")) {
@@ -80,10 +107,14 @@ categoryTabs.forEach((val) => {
 
           if (
             tabContents[0].classList.contains("tab__active") ||
-            tabContents[2].classList.contains("tab__active")
+            tabContents[1].classList.contains("tab__active") ||
+            tabContents[3].classList.contains("tab__active") ||
+            tabContents[4].classList.contains("tab__active")
           ) {
             tabContents[0].classList.remove("tab__active");
-            tabContents[2].classList.remove("tab__active");
+            tabContents[1].classList.remove("tab__active");
+            tabContents[3].classList.remove("tab__active");
+            tabContents[4].classList.remove("tab__active");
           }
         }
       } else if (tabTitle.includes("Electronics")) {
@@ -92,10 +123,30 @@ categoryTabs.forEach((val) => {
 
           if (
             tabContents[0].classList.contains("tab__active") ||
-            tabContents[1].classList.contains("tab__active")
+            tabContents[1].classList.contains("tab__active") ||
+            tabContents[2].classList.contains("tab__active") ||
+            tabContents[4].classList.contains("tab__active")
           ) {
             tabContents[0].classList.remove("tab__active");
             tabContents[1].classList.remove("tab__active");
+            tabContents[2].classList.remove("tab__active");
+            tabContents[4].classList.remove("tab__active");
+          }
+        }
+      } else if (tabTitle.includes("Home Appreance")) {
+        if (tabContent.attributes.id.textContent === "home_appreance") {
+          tabContent.classList.add("tab__active");
+
+          if (
+            tabContents[0].classList.contains("tab__active") ||
+            tabContents[1].classList.contains("tab__active") ||
+            tabContents[2].classList.contains("tab__active") ||
+            tabContents[3].classList.contains("tab__active")
+          ) {
+            tabContents[0].classList.remove("tab__active");
+            tabContents[1].classList.remove("tab__active");
+            tabContents[2].classList.remove("tab__active");
+            tabContents[3].classList.remove("tab__active");
           }
         }
       } else if (tabTitle.includes("Health Supplies")) {
@@ -117,7 +168,6 @@ function uploadCoverImage() {
     e.preventDefault();
     coverImageForm.classList.add("display_form_image");
   });
-
 }
 
 function getServerDataCategory(url) {

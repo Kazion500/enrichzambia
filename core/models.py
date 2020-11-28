@@ -72,6 +72,14 @@ class Profile(models.Model):
 
 
 class Category(models.Model):
+    CATEGORY_TYPE=(
+        ("Food","Food"),
+        ("Electronic", "Electronic"),
+        ("Home Appreance", "Home Appreance"),
+        ("Clothing", "Clothing"),
+        ("Shoes", "Shoes"),
+    )
+    cat_type = models.CharField(max_length=50,choices=CATEGORY_TYPE)
     name = models.CharField(max_length=50)
 
     def __str__(self):
@@ -88,6 +96,18 @@ class Review(models.Model):
         return str(self.rates)
 
 
+class Size(models.Model):
+    SIZES=(
+        ("S","Small"),
+        ("M","Medium"),
+        ("L","Large"),
+    )
+    name = models.CharField(max_length=30,choices=SIZES, unique=True)
+
+    def __str__(self):
+        return str(self.name)
+
+
 class Product(models.Model):
     product_uuid = models.UUIDField(
         primary_key=True, blank=True, default=uuid.uuid4, editable=False)
@@ -96,7 +116,7 @@ class Product(models.Model):
     name = models.CharField(max_length=50)
     actual_price = models.CharField(max_length=15)
     previous_price = models.CharField(max_length=15, null=True, blank=True)
-    description = models.TextField(max_length=300)
+    description = models.TextField(max_length=300, null=True, blank=True)
     image = models.ImageField(upload_to='product')
     approved = models.BooleanField(default=False)
     top_sale = models.BooleanField(default=False)
@@ -104,6 +124,7 @@ class Product(models.Model):
         Review, on_delete=models.CASCADE, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     product_type = models.CharField(max_length=20, choices=IS_SERVICE)
+    size = models.ManyToManyField(Size, null=True, blank=True)
 
     def __str__(self):
         return str(self.name)
