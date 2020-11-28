@@ -105,7 +105,7 @@ else:
             'NAME': 'enrichdb',
             'USER': 'kazionenrich',
             'PASSWORD': 'Changepass1',
-            'HOST': '206.189.19.24',
+            'HOST': 'localhost',
             'PORT': '',
         }
     }
