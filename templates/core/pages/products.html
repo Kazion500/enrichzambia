@@ -28,6 +28,7 @@
         <div><span class="category_tab">Food <i class="fas fa-chevron-down"></i></span></div>
         <div><span class="category_tab">Electronics <i class="fas fa-chevron-down"></i></span></div>
         <div><span class="category_tab">Home Appreance <i class="fas fa-chevron-down"></i></span></div>
+        <div><span class="category_tab">Finance <i class="fas fa-chevron-down"></i></span></div>
         <!-- <div><span class="category_tab">Health Supplies <i class="fas fa-chevron-down"></i></span></div> -->
       
         <!-- Tab Templates -->
@@ -89,6 +90,17 @@
             {% if categories %}
               {% for category in categories %}
                 {% if category.cat_type == 'Home Appreance' %}
+                  <a href="{% url 'category_search' category.name %}">{{ category.name }}</a>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="tab__content" id="finance">
+          <div class="tab__category">
+            {% if categories %}
+              {% for category in categories %}
+                {% if category.cat_type == 'Finance' %}
                   <a href="{% url 'category_search' category.name %}">{{ category.name }}</a>
                 {% endif %}
               {% endfor %}

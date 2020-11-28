@@ -51,7 +51,6 @@ categoryTabs.forEach((val) => {
     e.preventDefault();
     let tabTitle = val.textContent;
     tabContents.forEach((tabContent) => {
-      console.log(tabContents);
       if (tabTitle.includes("All Categories")) {
         if (val.classList.contains("active-class")) {
           val.classList.remove("active-class");
@@ -62,13 +61,15 @@ categoryTabs.forEach((val) => {
           tabContents[1].classList.contains("tab__active") ||
           tabContents[2].classList.contains("tab__active") ||
           tabContents[3].classList.contains("tab__active") ||
-          tabContents[4].classList.contains("tab__active")
+          tabContents[4].classList.contains("tab__active") ||
+          tabContents[5].classList.contains("tab__active")
         ) {
-          tabContents[0].classList.remove("tab__active"); 
-          tabContents[1].classList.remove("tab__active"); 
-          tabContents[2].classList.remove("tab__active"); 
-          tabContents[3].classList.remove("tab__active"); 
+          tabContents[0].classList.remove("tab__active");
+          tabContents[1].classList.remove("tab__active");
+          tabContents[2].classList.remove("tab__active");
+          tabContents[3].classList.remove("tab__active");
           tabContents[4].classList.remove("tab__active");
+          tabContents[5].classList.remove("tab__active");
         }
       } else if (tabTitle.includes("Clothing")) {
         if (tabContent.attributes.id.textContent === "cloth") {
@@ -77,12 +78,14 @@ categoryTabs.forEach((val) => {
             tabContents[1].classList.contains("tab__active") ||
             tabContents[2].classList.contains("tab__active") ||
             tabContents[3].classList.contains("tab__active") ||
-            tabContents[4].classList.contains("tab__active") 
+            tabContents[4].classList.contains("tab__active") ||
+            tabContents[5].classList.contains("tab__active")
           ) {
             tabContents[1].classList.remove("tab__active");
             tabContents[2].classList.remove("tab__active");
             tabContents[3].classList.remove("tab__active");
             tabContents[4].classList.remove("tab__active");
+            tabContents[5].classList.remove("tab__active");
           }
         }
       } else if (tabTitle.includes("Shoes")) {
@@ -93,12 +96,14 @@ categoryTabs.forEach((val) => {
             tabContents[0].classList.contains("tab__active") ||
             tabContents[2].classList.contains("tab__active") ||
             tabContents[3].classList.contains("tab__active") ||
-            tabContents[4].classList.contains("tab__active")
+            tabContents[4].classList.contains("tab__active") ||
+            tabContents[5].classList.contains("tab__active")
           ) {
             tabContents[0].classList.remove("tab__active");
             tabContents[2].classList.remove("tab__active");
             tabContents[3].classList.remove("tab__active");
             tabContents[4].classList.remove("tab__active");
+            tabContents[5].classList.remove("tab__active");
           }
         }
       } else if (tabTitle.includes("Food")) {
@@ -109,12 +114,14 @@ categoryTabs.forEach((val) => {
             tabContents[0].classList.contains("tab__active") ||
             tabContents[1].classList.contains("tab__active") ||
             tabContents[3].classList.contains("tab__active") ||
-            tabContents[4].classList.contains("tab__active")
+            tabContents[4].classList.contains("tab__active") ||
+            tabContents[5].classList.contains("tab__active")
           ) {
             tabContents[0].classList.remove("tab__active");
             tabContents[1].classList.remove("tab__active");
             tabContents[3].classList.remove("tab__active");
             tabContents[4].classList.remove("tab__active");
+            tabContents[5].classList.remove("tab__active");
           }
         }
       } else if (tabTitle.includes("Electronics")) {
@@ -125,12 +132,14 @@ categoryTabs.forEach((val) => {
             tabContents[0].classList.contains("tab__active") ||
             tabContents[1].classList.contains("tab__active") ||
             tabContents[2].classList.contains("tab__active") ||
-            tabContents[4].classList.contains("tab__active")
+            tabContents[4].classList.contains("tab__active") ||
+            tabContents[5].classList.contains("tab__active")
           ) {
             tabContents[0].classList.remove("tab__active");
             tabContents[1].classList.remove("tab__active");
             tabContents[2].classList.remove("tab__active");
             tabContents[4].classList.remove("tab__active");
+            tabContents[5].classList.remove("tab__active");
           }
         }
       } else if (tabTitle.includes("Home Appreance")) {
@@ -141,12 +150,32 @@ categoryTabs.forEach((val) => {
             tabContents[0].classList.contains("tab__active") ||
             tabContents[1].classList.contains("tab__active") ||
             tabContents[2].classList.contains("tab__active") ||
-            tabContents[3].classList.contains("tab__active")
+            tabContents[3].classList.contains("tab__active") ||
+            tabContents[5].classList.contains("tab__active")
           ) {
             tabContents[0].classList.remove("tab__active");
             tabContents[1].classList.remove("tab__active");
             tabContents[2].classList.remove("tab__active");
             tabContents[3].classList.remove("tab__active");
+            tabContents[5].classList.remove("tab__active");
+          }
+        }
+      } else if (tabTitle.includes("Finance")) {
+        if (tabContent.attributes.id.textContent === "finance") {
+          tabContent.classList.add("tab__active");
+          console.log(12333);
+          if (
+            tabContents[0].classList.contains("tab__active") ||
+            tabContents[1].classList.contains("tab__active") ||
+            tabContents[2].classList.contains("tab__active") ||
+            tabContents[3].classList.contains("tab__active") ||
+            tabContents[4].classList.contains("tab__active")
+          ) {
+            tabContents[0].classList.remove("tab__active");
+            tabContents[1].classList.remove("tab__active");
+            tabContents[2].classList.remove("tab__active");
+            tabContents[3].classList.remove("tab__active");
+            tabContents[4].classList.remove("tab__active");
           }
         }
       } else if (tabTitle.includes("Health Supplies")) {

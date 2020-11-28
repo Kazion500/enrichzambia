@@ -78,6 +78,7 @@ class Category(models.Model):
         ("Home Appreance", "Home Appreance"),
         ("Clothing", "Clothing"),
         ("Shoes", "Shoes"),
+        ("Finance", "Finance"),
     )
     cat_type = models.CharField(max_length=50,choices=CATEGORY_TYPE)
     name = models.CharField(max_length=50)
